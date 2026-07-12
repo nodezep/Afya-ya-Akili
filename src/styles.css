@@ -1,0 +1,161 @@
+/* ==========================================================
+   Akili design system — Swahili coast
+   Palette: deep ocean teal, warm sand, kanga crimson (sparingly).
+   Type: Bricolage Grotesque (display) / Atkinson Hyperlegible (body).
+   Signature: the "methali" kanga band.
+   ========================================================== */
+
+:root {
+  --ocean: #123f47;        /* deep Indian-Ocean teal: headings, dark surfaces */
+  --palm: #4f7d6e;         /* muted palm teal: secondary actions */
+  --accent: #4f7d6e;       /* kept for components that reference it */
+  --kanga: #8e2f3c;        /* kanga crimson: ONE accent, used sparingly */
+  --sand: #f4efe3;         /* warm sand background */
+  --shell: #fffdf7;        /* card surface */
+  --soft: #e3dcc9;         /* borders */
+  --ink: #24312c;          /* body text */
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Atkinson Hyperlegible', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--sand);
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+.wrap { max-width: 640px; margin: 0 auto; padding: 20px 20px 64px; }
+
+h1, h2 {
+  font-family: var(--font-display);
+  color: var(--ocean);
+  letter-spacing: -0.01em;
+}
+h1 { font-size: 1.8rem; font-weight: 800; margin: 0; }
+h2 { font-size: 1.25rem; font-weight: 600; margin-top: 0; }
+
+/* ---------- cards ---------- */
+section, form, aside {
+  background: var(--shell);
+  border: 1px solid var(--soft);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 16px 0;
+}
+
+/* ---------- controls ---------- */
+button {
+  cursor: pointer;
+  border: 1px solid var(--soft);
+  background: var(--shell);
+  color: var(--ink);
+  font: inherit;
+  padding: 10px 16px;
+  border-radius: 999px;
+  margin: 4px 6px 4px 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+button:hover { background: var(--ocean); color: var(--shell); }
+button:disabled { opacity: 0.55; cursor: wait; }
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--palm);
+  outline-offset: 2px;
+}
+
+input, textarea {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border: 1px solid var(--soft);
+  border-radius: 10px;
+  font: inherit;
+  background: var(--shell);
+}
+
+.topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+
+nav[aria-label='Sections'] { margin: 12px 0 4px; }
+nav[aria-label='Sections'] button[aria-current='true'] {
+  background: var(--ocean);
+  color: var(--shell);
+  border-color: var(--ocean);
+}
+
+/* ---------- signature: the methali kanga band ----------
+   Kanga cloths frame a printed message (the "jina") between
+   patterned borders. The striped top/bottom edges echo that. */
+.methali {
+  border: none;
+  border-radius: 12px;
+  padding: 22px 20px;
+  background:
+    repeating-linear-gradient(90deg,
+      var(--kanga) 0 10px, transparent 10px 20px) top / 100% 6px no-repeat,
+    repeating-linear-gradient(90deg,
+      var(--kanga) 0 10px, transparent 10px 20px) bottom / 100% 6px no-repeat,
+    var(--shell);
+  border-left: 1px solid var(--soft);
+  border-right: 1px solid var(--soft);
+  text-align: center;
+}
+.methali-eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--kanga);
+  font-weight: 700;
+}
+.methali-proverb {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ocean);
+  margin: 8px 0 2px;
+}
+.methali-translation { margin: 0; font-size: 0.95rem; opacity: 0.75; }
+.methali-question { margin: 10px 0 0; font-weight: 700; }
+
+/* ---------- chat ---------- */
+.chat-log { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.bubble {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  margin: 0;
+}
+.bubble.user {
+  align-self: flex-end;
+  background: var(--ocean);
+  color: var(--shell);
+  border-bottom-right-radius: 4px;
+}
+.bubble.assistant {
+  align-self: flex-start;
+  background: var(--sand);
+  border: 1px solid var(--soft);
+  border-bottom-left-radius: 4px;
+}
+.disclaimer { font-size: 0.85rem; opacity: 0.75; }
+
+/* ---------- lists (history, journal) ---------- */
+ul { list-style: none; padding: 0; }
+li {
+  border-top: 1px solid var(--soft);
+  padding: 10px 0;
+}
+time { font-size: 0.8rem; color: var(--palm); font-weight: 700; }
+
+/* ---------- accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  /* The breathing circle keeps its slow functional movement only if
+     the user starts it themselves; decorative transitions stop. */
+}
